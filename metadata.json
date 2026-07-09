@@ -1,0 +1,6 @@
+{
+  "name": "Enterprise Institutional Repository",
+  "description": "Enterprise Institutional Repository and Digital Library Management System for research, theses, dissertations, and institutional publications.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,760 @@
+{
+  "users": [
+    {
+      "id": "u1",
+      "username": "admin",
+      "email": "admin@institution.edu",
+      "password": "$2b$10$5bzwU/vYj9Bjuo002hMVF.lw11cfB1uUcXbRkCfLNB0dpAsUKAhlS",
+      "role": "Administrator",
+      "department": "Administration",
+      "faculty": "University Management",
+      "viewPreference": "grid"
+    },
+    {
+      "id": "u2",
+      "username": "manager",
+      "email": "manager@institution.edu",
+      "password": "$2b$10$/ZhoZFraINo7S1kO/VSeB.stP7zOUNVTWBAwRSCQDL2hsCWz8pO7m",
+      "role": "Repository Manager",
+      "department": "Library Science",
+      "faculty": "Information Science",
+      "viewPreference": "grid"
+    },
+    {
+      "id": "u3",
+      "username": "librarian",
+      "email": "librarian@institution.edu",
+      "password": "$2b$10$c1oXZFm3h/QV5xywUGXGLet/Zqc54LixSRXPSRGKVlRBnYRaST4q6",
+      "role": "Librarian",
+      "department": "Information Science",
+      "faculty": "Arts & Sciences",
+      "viewPreference": "grid"
+    },
+    {
+      "id": "u4",
+      "username": "researcher",
+      "email": "researcher@institution.edu",
+      "password": "$2b$10$PWed5EJAz62dvNFGfaIWwuokm0VXCAdB/6w8/4oVSTMrKRzggBWRm",
+      "role": "Staff / Researcher",
+      "department": "Computer Science",
+      "faculty": "School of ICT",
+      "viewPreference": "grid"
+    },
+    {
+      "id": "u5",
+      "username": "student",
+      "email": "student@institution.edu",
+      "password": "$2b$10$hniOxKCOievMLCA8Y9mRQuQi/0D.R7nqR.GDIGqQawWVBJIKJEFLy",
+      "role": "Student",
+      "department": "Business Analytics",
+      "faculty": "School of Business",
+      "viewPreference": "grid"
+    }
+  ],
+  "roles": [
+    {
+      "id": "r1",
+      "name": "Administrator",
+      "description": "Full system control, manage settings, themes, and users"
+    },
+    {
+      "id": "r2",
+      "name": "Repository Manager",
+      "description": "Manage repository structure (communities, collections) and workflows"
+    },
+    {
+      "id": "r3",
+      "name": "Librarian / Moderator",
+      "description": "Review submissions, manage metadata and collections"
+    },
+    {
+      "id": "r4",
+      "name": "Staff / Researcher",
+      "description": "Submit own documents and manage their submissions"
+    },
+    {
+      "id": "r5",
+      "name": "Student",
+      "description": "Access repository and bookmark documents"
+    },
+    {
+      "id": "r6",
+      "name": "Public User",
+      "description": "Browse and search content anonymously"
+    }
+  ],
+  "permissions": [
+    {
+      "id": "p1",
+      "name": "MANAGE_USERS",
+      "description": "Create, update, and delete users"
+    },
+    {
+      "id": "p2",
+      "name": "MANAGE_STRUCTURE",
+      "description": "Create and modify communities and collections"
+    },
+    {
+      "id": "p3",
+      "name": "REVIEW_SUBMISSIONS",
+      "description": "Approve or reject researcher uploads"
+    },
+    {
+      "id": "p4",
+      "name": "UPLOAD_DOCUMENTS",
+      "description": "Upload research materials and papers"
+    },
+    {
+      "id": "p5",
+      "name": "MANAGE_SETTINGS",
+      "description": "Configure system themes, limits, and view controls"
+    }
+  ],
+  "role_permissions": [
+    {
+      "roleId": "Administrator",
+      "permissionId": "p1"
+    },
+    {
+      "roleId": "Administrator",
+      "permissionId": "p2"
+    },
+    {
+      "roleId": "Administrator",
+      "permissionId": "p3"
+    },
+    {
+      "roleId": "Administrator",
+      "permissionId": "p4"
+    },
+    {
+      "roleId": "Administrator",
+      "permissionId": "p5"
+    },
+    {
+      "roleId": "Repository Manager",
+      "permissionId": "p2"
+    },
+    {
+      "roleId": "Repository Manager",
+      "permissionId": "p3"
+    },
+    {
+      "roleId": "Repository Manager",
+      "permissionId": "p4"
+    },
+    {
+      "roleId": "Librarian / Moderator",
+      "permissionId": "p3"
+    },
+    {
+      "roleId": "Librarian / Moderator",
+      "permissionId": "p4"
+    },
+    {
+      "roleId": "Staff / Researcher",
+      "permissionId": "p4"
+    }
+  ],
+  "communities": [
+    {
+      "id": "comm1",
+      "name": "School of ICT",
+      "description": "Research outputs from the School of Information and Communication Technology."
+    },
+    {
+      "id": "comm2",
+      "name": "School of Business",
+      "description": "Publications, business papers, and student theses from the Business School."
+    },
+    {
+      "id": "comm3",
+      "name": "School of Law",
+      "description": "Legal treatises, case studies, and policy publications from the Law Department."
+    },
+    {
+      "id": "comm4",
+      "name": "Research Directorate",
+      "description": "Institutional reports, collaborative research grants, and university-wide studies."
+    }
+  ],
+  "collections": [
+    {
+      "id": "coll1",
+      "name": "Theses & Dissertations",
+      "description": "Master's and Doctoral level research documents.",
+      "communityId": "comm1"
+    },
+    {
+      "id": "coll2",
+      "name": "Research Papers & Preprints",
+      "description": "Preprints and published scientific papers of the School of ICT.",
+      "communityId": "comm1"
+    },
+    {
+      "id": "coll3",
+      "name": "Journal Articles",
+      "description": "Peer-reviewed academic journal publications.",
+      "communityId": "comm1"
+    },
+    {
+      "id": "coll4",
+      "name": "Conference Proceedings",
+      "description": "Papers presented at conferences and colloquiums.",
+      "communityId": "comm2"
+    },
+    {
+      "id": "coll5",
+      "name": "Institutional Reports",
+      "description": "Official annual reports and governance policies.",
+      "communityId": "comm4"
+    }
+  ],
+  "documents": [
+    {
+      "id": "doc1",
+      "title": "Deep Learning Architectures for Academic Document Parsing",
+      "author": "Dr. Evelyn Carter",
+      "coAuthors": "Prof. Adam Vance, Dr. Sarah Jenkins",
+      "department": "Computer Science",
+      "faculty": "School of ICT",
+      "keywords": "Deep Learning, OCR, Layout Analysis, PDF Parsing, Academic Repositories",
+      "abstract": "This paper proposes a novel transformer-based neural network architecture tailored for parsing hierarchical semantic structures of multi-page academic publications. We achieve a 98.4% F1-score on the Benchmark Academic Dataset, significantly outperforming legacy heuristics.",
+      "description": "Preprint version submitted for peer review.",
+      "publicationYear": 2025,
+      "language": "English",
+      "publisher": "IEEE Transactions on Artificial Intelligence",
+      "isbn": "",
+      "issn": "1558-2205",
+      "doi": "10.1109/TAI.2025.12345",
+      "rightsStatement": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+      "status": "Approved",
+      "communityId": "comm1",
+      "collectionId": "coll2",
+      "submitterId": "u4",
+      "downloadCount": 145,
+      "viewCount": 382,
+      "isFeatured": true,
+      "createdAt": "2026-01-10T10:00:00Z",
+      "updatedAt": "2026-01-12T14:30:00Z"
+    },
+    {
+      "id": "doc2",
+      "title": "Analysis of Blockchain Solutions in Healthcare Records Security",
+      "author": "Dr. Alan Turing",
+      "coAuthors": "Dr. Grace Hopper",
+      "department": "Cyber Security",
+      "faculty": "School of ICT",
+      "keywords": "Blockchain, Healthcare, Security, Smart Contracts, Cryptography",
+      "abstract": "A comprehensive investigation into decentralized ledger frameworks applied to Electronic Health Records. We evaluate smart contract configurations to enforce strict HIPAA compliance, concluding that hybrid public-private architectures represent the optimal security-efficiency tradeoff.",
+      "description": "Accepted journal version.",
+      "publicationYear": 2024,
+      "language": "English",
+      "publisher": "Journal of Health Informatics",
+      "isbn": "",
+      "issn": "1234-5678",
+      "doi": "10.1016/j.jhi.2024.05.012",
+      "rightsStatement": "Institutional Proprietary Rights",
+      "status": "Approved",
+      "communityId": "comm1",
+      "collectionId": "coll3",
+      "submitterId": "u4",
+      "downloadCount": 92,
+      "viewCount": 215,
+      "isFeatured": false,
+      "createdAt": "2024-06-15T09:00:00Z",
+      "updatedAt": "2024-06-20T11:00:00Z"
+    },
+    {
+      "id": "doc3",
+      "title": "Institutional Financial Performance & Environmental Metrics 2025",
+      "author": "Finance & Compliance Directorate",
+      "coAuthors": "Sustainability Committee",
+      "department": "Finance",
+      "faculty": "University Management",
+      "keywords": "Annual Report, Financial Audit, Sustainability, ESG, Green Campus",
+      "abstract": "This comprehensive institutional report details the university's financial status for fiscal year 2025 alongside our progress in carbon emissions mitigation, power-efficiency measures, and green-building initiatives.",
+      "description": "Approved official report for public disclosure.",
+      "publicationYear": 2025,
+      "language": "English",
+      "publisher": "University Press",
+      "isbn": "978-3-16-148410-0",
+      "issn": "",
+      "doi": "",
+      "rightsStatement": "Public Domain",
+      "status": "Approved",
+      "communityId": "comm4",
+      "collectionId": "coll5",
+      "submitterId": "u1",
+      "downloadCount": 41,
+      "viewCount": 112,
+      "isFeatured": true,
+      "createdAt": "2025-12-01T08:30:00Z",
+      "updatedAt": "2025-12-05T16:00:00Z"
+    },
+    {
+      "id": "doc4",
+      "title": "Sustainable Legal Frameworks for Emerging Autonomous AI Entities",
+      "author": "Prof. Julian Sterling",
+      "coAuthors": "",
+      "department": "Constitutional Law",
+      "faculty": "School of Law",
+      "keywords": "AI Law, Autonomy, Legal Personhood, Liability, Smart Regulations",
+      "abstract": "As artificial intelligence models advance from static tools to proactive autonomous agents, current liability models fail. This thesis analyzes potential frameworks of limited legal personhood for artificial intelligence systems, establishing accountability protocols.",
+      "description": "Doctoral Dissertation.",
+      "publicationYear": 2026,
+      "language": "English",
+      "publisher": "Law Library Press",
+      "isbn": "",
+      "issn": "",
+      "doi": "10.5555/law.ai.2026.1",
+      "rightsStatement": "All Rights Reserved",
+      "status": "Pending Review",
+      "communityId": "comm3",
+      "collectionId": "coll1",
+      "submitterId": "u4",
+      "downloadCount": 0,
+      "viewCount": 14,
+      "isFeatured": false,
+      "createdAt": "2026-02-18T11:45:00Z",
+      "updatedAt": "2026-02-18T11:45:00Z"
+    }
+  ],
+  "document_files": [
+    {
+      "id": "f1",
+      "documentId": "doc1",
+      "fileName": "academic_parser_preprint.pdf",
+      "filePath": "/uploads/doc1_sample.pdf",
+      "fileSize": 1245000,
+      "mimeType": "application/pdf",
+      "createdAt": "2026-01-10T10:00:00Z"
+    },
+    {
+      "id": "f2",
+      "documentId": "doc2",
+      "fileName": "blockchain_healthcare_compliance.pdf",
+      "filePath": "/uploads/doc2_sample.pdf",
+      "fileSize": 2150000,
+      "mimeType": "application/pdf",
+      "createdAt": "2024-06-15T09:00:00Z"
+    },
+    {
+      "id": "f3",
+      "documentId": "doc3",
+      "fileName": "annual_finance_report_2025.pdf",
+      "filePath": "/uploads/doc3_sample.pdf",
+      "fileSize": 4120000,
+      "mimeType": "application/pdf",
+      "createdAt": "2025-12-01T08:30:00Z"
+    },
+    {
+      "id": "f4",
+      "documentId": "doc4",
+      "fileName": "autonomous_ai_legal_framework.pdf",
+      "filePath": "/uploads/doc4_sample.pdf",
+      "fileSize": 980000,
+      "mimeType": "application/pdf",
+      "createdAt": "2026-02-18T11:45:00Z"
+    }
+  ],
+  "document_versions": [
+    {
+      "id": "v1_1",
+      "documentId": "doc1",
+      "versionNumber": 1,
+      "fileName": "academic_parser_preprint.pdf",
+      "filePath": "/uploads/doc1_sample.pdf",
+      "description": "Initial Submission",
+      "createdBy": "u4",
+      "createdAt": "2026-01-10T10:00:00Z"
+    },
+    {
+      "id": "v2_1",
+      "documentId": "doc2",
+      "versionNumber": 1,
+      "fileName": "blockchain_healthcare_compliance.pdf",
+      "filePath": "/uploads/doc2_sample.pdf",
+      "description": "Submitted peer-reviewed version",
+      "createdBy": "u4",
+      "createdAt": "2024-06-15T09:00:00Z"
+    },
+    {
+      "id": "v3_1",
+      "documentId": "doc3",
+      "versionNumber": 1,
+      "fileName": "annual_finance_report_2025.pdf",
+      "filePath": "/uploads/doc3_sample.pdf",
+      "description": "Official Approved Version",
+      "createdBy": "u1",
+      "createdAt": "2025-12-01T08:30:00Z"
+    },
+    {
+      "id": "v4_1",
+      "documentId": "doc4",
+      "versionNumber": 1,
+      "fileName": "autonomous_ai_legal_framework.pdf",
+      "filePath": "/uploads/doc4_sample.pdf",
+      "description": "Draft Dissertation",
+      "createdBy": "u4",
+      "createdAt": "2026-02-18T11:45:00Z"
+    }
+  ],
+  "metadata": [
+    {
+      "id": "m1_1",
+      "documentId": "doc1",
+      "element": "title",
+      "value": "Deep Learning Architectures for Academic Document Parsing"
+    },
+    {
+      "id": "m1_2",
+      "documentId": "doc1",
+      "element": "creator",
+      "value": "Dr. Evelyn Carter"
+    },
+    {
+      "id": "m1_3",
+      "documentId": "doc1",
+      "element": "contributor",
+      "value": "Prof. Adam Vance"
+    },
+    {
+      "id": "m1_4",
+      "documentId": "doc1",
+      "element": "subject",
+      "value": "Deep Learning, OCR, Layout Analysis"
+    },
+    {
+      "id": "m1_5",
+      "documentId": "doc1",
+      "element": "date",
+      "value": "2025"
+    },
+    {
+      "id": "m1_6",
+      "documentId": "doc1",
+      "element": "publisher",
+      "value": "IEEE Transactions on Artificial Intelligence"
+    },
+    {
+      "id": "m1_7",
+      "documentId": "doc1",
+      "element": "identifier",
+      "value": "doi:10.1109/TAI.2025.12345"
+    },
+    {
+      "id": "m1_8",
+      "documentId": "doc1",
+      "element": "rights",
+      "value": "Creative Commons Attribution 4.0"
+    }
+  ],
+  "downloads": [
+    {
+      "id": "dl1",
+      "documentId": "doc1",
+      "userId": "u5",
+      "timestamp": "2026-05-12T14:20:00Z",
+      "ipAddress": "192.168.1.100"
+    },
+    {
+      "id": "dl2",
+      "documentId": "doc1",
+      "userId": "public",
+      "timestamp": "2026-06-01T10:15:00Z",
+      "ipAddress": "203.0.113.12"
+    },
+    {
+      "id": "dl3",
+      "documentId": "doc2",
+      "userId": "public",
+      "timestamp": "2026-06-10T12:00:00Z",
+      "ipAddress": "203.0.113.15"
+    },
+    {
+      "id": "dl4",
+      "documentId": "doc3",
+      "userId": "u5",
+      "timestamp": "2026-06-20T16:45:00Z",
+      "ipAddress": "192.168.1.102"
+    }
+  ],
+  "views": [
+    {
+      "id": "vw1",
+      "documentId": "doc1",
+      "userId": "public",
+      "timestamp": "2026-06-01T10:14:00Z",
+      "ipAddress": "203.0.113.12"
+    },
+    {
+      "id": "vw2",
+      "documentId": "doc2",
+      "userId": "public",
+      "timestamp": "2026-06-10T11:58:00Z",
+      "ipAddress": "203.0.113.15"
+    },
+    {
+      "id": "vw3",
+      "documentId": "doc3",
+      "userId": "u5",
+      "timestamp": "2026-06-20T16:42:00Z",
+      "ipAddress": "192.168.1.102"
+    },
+    {
+      "id": "vw4",
+      "documentId": "doc4",
+      "userId": "u3",
+      "timestamp": "2026-06-21T09:12:00Z",
+      "ipAddress": "192.168.1.5"
+    }
+  ],
+  "approvals": [
+    {
+      "id": "ap1",
+      "documentId": "doc1",
+      "reviewerId": "u3",
+      "reviewerName": "Librarian Reviewer",
+      "action": "Approved",
+      "comment": "Metadata checks out, paper complies with open-access specifications.",
+      "createdAt": "2026-01-12T14:30:00Z"
+    }
+  ],
+  "workflow_history": [
+    {
+      "id": "wf1",
+      "documentId": "doc1",
+      "actorId": "u4",
+      "actorName": "Dr. Evelyn Carter",
+      "previousStatus": "Draft",
+      "newStatus": "Submitted",
+      "comment": "Initial submission of my deep learning paper",
+      "createdAt": "2026-01-10T10:00:00Z"
+    },
+    {
+      "id": "wf2",
+      "documentId": "doc1",
+      "actorId": "u3",
+      "actorName": "Librarian Reviewer",
+      "previousStatus": "Submitted",
+      "newStatus": "Approved",
+      "comment": "Review and approval of metadata indexing.",
+      "createdAt": "2026-01-12T14:30:00Z"
+    },
+    {
+      "id": "wf3",
+      "documentId": "doc4",
+      "actorId": "u4",
+      "actorName": "Prof. Julian Sterling",
+      "previousStatus": "Draft",
+      "newStatus": "Pending Review",
+      "comment": "Submitting final draft of legal frameworks dissertation",
+      "createdAt": "2026-02-18T11:45:00Z"
+    }
+  ],
+  "notifications": [
+    {
+      "id": "nt1",
+      "userId": "u4",
+      "message": "Your paper \"Deep Learning Architectures for Academic Document Parsing\" has been APPROVED and published.",
+      "isRead": false,
+      "createdAt": "2026-01-12T14:30:00Z",
+      "documentId": "doc1"
+    }
+  ],
+  "audit_logs": [
+    {
+      "id": "al1",
+      "userId": "u1",
+      "username": "admin",
+      "ipAddress": "127.0.0.1",
+      "action": "System Initialized and Seed Data Loaded",
+      "timestamp": "2026-06-24T06:00:00Z"
+    }
+  ],
+  "themes": [
+    {
+      "id": "1",
+      "name": "Orange Green (Default)",
+      "primaryColor": "#F57C00",
+      "secondaryColor": "#2E7D32",
+      "isDark": false
+    },
+    {
+      "id": "2",
+      "name": "Blue",
+      "primaryColor": "#1976D2",
+      "secondaryColor": "#455A64",
+      "isDark": false
+    },
+    {
+      "id": "3",
+      "name": "Dark Mode",
+      "primaryColor": "#374151",
+      "secondaryColor": "#1F2937",
+      "isDark": true
+    },
+    {
+      "id": "4",
+      "name": "Institutional Theme",
+      "primaryColor": "#0D47A1",
+      "secondaryColor": "#FFB300",
+      "isDark": false
+    }
+  ],
+  "settings": [
+    {
+      "id": "1",
+      "setting_name": "default_view_mode",
+      "setting_value": "grid"
+    },
+    {
+      "id": "2",
+      "setting_name": "enable_user_override",
+      "setting_value": "true"
+    },
+    {
+      "id": "3",
+      "setting_name": "active_theme",
+      "setting_value": "1"
+    },
+    {
+      "id": "4",
+      "setting_name": "upload_max_size_mb",
+      "setting_value": "50"
+    },
+    {
+      "id": "5",
+      "setting_name": "smtp_host",
+      "setting_value": "smtp.institution.edu"
+    },
+    {
+      "id": "6",
+      "setting_name": "repository_name",
+      "setting_value": "NIPA RESEARCH REPOSITORY"
+    },
+    {
+      "id": "7",
+      "setting_name": "repository_subtitle",
+      "setting_value": "National Institute of Public Administration"
+    },
+    {
+      "id": "8",
+      "setting_name": "hero_title",
+      "setting_value": "NIPA Research & Academic Repository"
+    },
+    {
+      "id": "9",
+      "setting_name": "hero_desc",
+      "setting_value": "Discover scholarly journals, master's theses, research papers, and policy guidelines published by the National Institute of Public Administration (NIPA) community."
+    },
+    {
+      "id": "10",
+      "setting_name": "hero_bg_image",
+      "setting_value": "https://images.unsplash.com/photo-1507842217343-583bb7270b66?q=80&w=2000"
+    },
+    {
+      "id": "11",
+      "setting_name": "repository_logo_icon",
+      "setting_value": "BookOpen"
+    },
+    {
+      "id": "12",
+      "setting_name": "repository_logo_image",
+      "setting_value": "/uploads/nipa_logo.jpg"
+    },
+    {
+      "id": "13",
+      "setting_name": "hero_bg_color",
+      "setting_value": "#0f172a"
+    },
+    {
+      "id": "14",
+      "setting_name": "hero_bg_opacity",
+      "setting_value": "10"
+    },
+    {
+      "id": "15",
+      "setting_name": "hero_bg_color_opacity",
+      "setting_value": "100"
+    },
+    {
+      "id": "16",
+      "setting_name": "last_backup_time",
+      "setting_value": ""
+    }
+  ],
+  "favorites": [
+    {
+      "id": "fav1",
+      "userId": "u5",
+      "documentId": "doc1",
+      "createdAt": "2026-05-15T10:00:00Z"
+    }
+  ],
+  "bookmarks": [
+    {
+      "id": "bm1",
+      "userId": "u5",
+      "documentId": "doc1",
+      "notes": "Excellent dataset references",
+      "createdAt": "2026-05-15T10:00:00Z"
+    }
+  ],
+  "search_logs": [
+    {
+      "id": "sl1",
+      "query": "deep learning",
+      "count": 18,
+      "timestamp": "2026-06-24T04:30:00Z"
+    },
+    {
+      "id": "sl2",
+      "query": "blockchain health",
+      "count": 12,
+      "timestamp": "2026-06-24T05:12:00Z"
+    },
+    {
+      "id": "sl3",
+      "query": "annual report",
+      "count": 7,
+      "timestamp": "2026-06-24T05:55:00Z"
+    }
+  ],
+  "role_custom_permissions": [
+    {
+      "roleName": "Student",
+      "customPermissions": []
+    },
+    {
+      "roleName": "Staff / Researcher",
+      "customPermissions": [
+        "BYPASS_CURATION"
+      ]
+    },
+    {
+      "roleName": "Librarian",
+      "customPermissions": [
+        "BYPASS_CURATION"
+      ]
+    },
+    {
+      "roleName": "Repository Manager",
+      "customPermissions": [
+        "BYPASS_CURATION",
+        "EXPORT_SECURE_REPORTS"
+      ]
+    },
+    {
+      "roleName": "Administrator",
+      "customPermissions": [
+        "BYPASS_CURATION",
+        "DESTROY_ARCHIVE",
+        "EXPORT_SECURE_REPORTS",
+        "SYSTEM_CREDENTIALS",
+        "ROOT_SUPERUSER"
+      ]
+    }
+  ]
+}

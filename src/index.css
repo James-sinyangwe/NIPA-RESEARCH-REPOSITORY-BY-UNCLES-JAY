@@ -1,0 +1,4 @@
+@import "tailwindcss";
+
+/* Force dark mode styles to only apply when the .dark class is explicitly present, preventing system dark mode preferences from overriding app colors */
+@variant dark (&:where(.dark, .dark *));
