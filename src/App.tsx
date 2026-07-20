@@ -739,13 +739,19 @@ export default function App() {
       </main>
 
       {/* FOOTER */}
-      <footer className="bg-slate-900 border-t border-slate-850 py-8 text-slate-400 text-xs font-sans mt-12">
+      <footer 
+        className="border-t py-8 text-white/80 text-xs font-sans mt-12 transition-all duration-300"
+        style={{ 
+          backgroundColor: primaryColor,
+          borderColor: isDarkTheme ? '#1e293b' : 'rgba(255, 255, 255, 0.15)'
+        }}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-4">
           <div className="text-center sm:text-left space-y-1">
             <span className="block font-bold text-white text-sm">{repoName} Institutional System</span>
-            <span className="block text-[10px] font-mono text-slate-500">OAI-PMH & Dublin Core Metadata Compliant Digital Library Platform</span>
+            <span className="block text-[10px] font-mono text-white/60">OAI-PMH & Dublin Core Metadata Compliant Digital Library Platform</span>
           </div>
-          <div className="flex gap-4 text-slate-400 font-semibold">
+          <div className="flex gap-4 text-white/80 font-semibold">
             <span>Public Commons Archive</span>
             <span>·</span>
             <span>Administrative Charter</span>

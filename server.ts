@@ -186,75 +186,76 @@ function hashPassword(password: string): string {
   return bcrypt.hashSync(password, 10);
 }
 
-function initDB(): RelationalDatabase {
-  if (fs.existsSync(DB_PATH)) {
-    try {
-      const data = fs.readFileSync(DB_PATH, 'utf8');
-      const loadedDb = JSON.parse(data);
-      
-      // Migrate loadedDb with new site customization settings if missing
-      let modified = false;
-      DEFAULT_SETTINGS.forEach(defSetting => {
-        const found = loadedDb.settings.find((s: any) => s.setting_name === defSetting.setting_name);
-        if (!found) {
-          loadedDb.settings.push({ ...defSetting });
-          modified = true;
-        }
-      });
+function migrateDatabaseState(loadedDb: RelationalDatabase): { db: RelationalDatabase; modified: boolean } {
+  let modified = false;
 
-      // Custom settings can be freely customized by administrators and persisted permanently.
+  // Ensure default themes exist if missing
+  if (!loadedDb.themes) {
+    loadedDb.themes = [...DEFAULT_THEMES];
+    modified = true;
+  }
+  if (!loadedDb.settings) {
+    loadedDb.settings = [];
+    modified = true;
+  }
 
-      if (!loadedDb.role_custom_permissions) {
-        loadedDb.role_custom_permissions = [
-          { roleName: 'Student', customPermissions: ['SUBMISSION'] },
-          { roleName: 'Staff / Researcher', customPermissions: ['BYPASS_CURATION', 'SUBMISSION'] },
-          { roleName: 'Librarian', customPermissions: ['BYPASS_CURATION'] },
-          { roleName: 'Repository Manager', customPermissions: ['BYPASS_CURATION', 'EXPORT_SECURE_REPORTS'] },
-          { roleName: 'Administrator', customPermissions: ['BYPASS_CURATION', 'DESTROY_ARCHIVE', 'EXPORT_SECURE_REPORTS', 'SYSTEM_CREDENTIALS', 'ROOT_SUPERUSER'] }
-        ];
-        modified = true;
-      } else {
-        const studentRole = loadedDb.role_custom_permissions.find((r: any) => r.roleName === 'Student');
-        if (studentRole && !studentRole.customPermissions.includes('SUBMISSION')) {
-          studentRole.customPermissions.push('SUBMISSION');
-          modified = true;
-        }
-        const staffRole = loadedDb.role_custom_permissions.find((r: any) => r.roleName === 'Staff / Researcher');
-        if (staffRole && !staffRole.customPermissions.includes('SUBMISSION')) {
-          staffRole.customPermissions.push('SUBMISSION');
-          modified = true;
-        }
-      }
+  // Migrate loadedDb with new site customization settings if missing
+  DEFAULT_SETTINGS.forEach(defSetting => {
+    const found = loadedDb.settings.find((s: any) => s.setting_name === defSetting.setting_name);
+    if (!found) {
+      loadedDb.settings.push({ ...defSetting });
+      modified = true;
+    }
+  });
 
-      loadedDb.users.forEach((u: any) => {
-        if (!u.customPermissions) {
-          u.customPermissions = [];
-          modified = true;
-        }
-        if (u.role === 'Student' && !u.customPermissions.includes('SUBMISSION')) {
-          u.customPermissions.push('SUBMISSION');
-          modified = true;
-        }
-        if (u.role === 'Staff / Researcher' && !u.customPermissions.includes('SUBMISSION')) {
-          u.customPermissions.push('SUBMISSION');
-          modified = true;
-        }
-        // Upgrade password to bcrypt hash if it's currently plaintext
-        if (!isHashed(u.password)) {
-          u.password = hashPassword(u.password);
-          modified = true;
-        }
-      });
-
-      if (modified) {
-        fs.writeFileSync(DB_PATH, JSON.stringify(loadedDb, null, 2), 'utf8');
-      }
-      return loadedDb;
-    } catch (e) {
-      console.error("Error reading database.json, re-initializing", e);
+  if (!loadedDb.role_custom_permissions) {
+    loadedDb.role_custom_permissions = [
+      { roleName: 'Student', customPermissions: ['SUBMISSION'] },
+      { roleName: 'Staff / Researcher', customPermissions: ['BYPASS_CURATION', 'SUBMISSION'] },
+      { roleName: 'Librarian', customPermissions: ['BYPASS_CURATION'] },
+      { roleName: 'Repository Manager', customPermissions: ['BYPASS_CURATION', 'EXPORT_SECURE_REPORTS'] },
+      { roleName: 'Administrator', customPermissions: ['BYPASS_CURATION', 'DESTROY_ARCHIVE', 'EXPORT_SECURE_REPORTS', 'SYSTEM_CREDENTIALS', 'ROOT_SUPERUSER'] }
+    ];
+    modified = true;
+  } else {
+    const studentRole = loadedDb.role_custom_permissions.find((r: any) => r.roleName === 'Student');
+    if (studentRole && !studentRole.customPermissions.includes('SUBMISSION')) {
+      studentRole.customPermissions.push('SUBMISSION');
+      modified = true;
+    }
+    const staffRole = loadedDb.role_custom_permissions.find((r: any) => r.roleName === 'Staff / Researcher');
+    if (staffRole && !staffRole.customPermissions.includes('SUBMISSION')) {
+      staffRole.customPermissions.push('SUBMISSION');
+      modified = true;
     }
   }
 
+  if (loadedDb.users) {
+    loadedDb.users.forEach((u: any) => {
+      if (!u.customPermissions) {
+        u.customPermissions = [];
+        modified = true;
+      }
+      if (u.role === 'Student' && !u.customPermissions.includes('SUBMISSION')) {
+        u.customPermissions.push('SUBMISSION');
+        modified = true;
+      }
+      if (u.role === 'Staff / Researcher' && !u.customPermissions.includes('SUBMISSION')) {
+        u.customPermissions.push('SUBMISSION');
+        modified = true;
+      }
+      // Upgrade password to bcrypt hash if it's currently plaintext
+      if (!isHashed(u.password)) {
+        u.password = hashPassword(u.password);
+        modified = true;
+      }
+    });
+  }
+
+  return { db: loadedDb, modified };
+}
+
+function initDB(): RelationalDatabase {
   // Create a beautiful pre-seeded relational database
   const seedDB: RelationalDatabase = {
     users: [
@@ -485,15 +486,15 @@ function initDB(): RelationalDatabase {
     ]
   };
 
-  // Hash all seed user passwords before writing
+  // Hash all seed user passwords before returning
   seedDB.users.forEach((u: any) => {
     if (!isHashed(u.password)) {
       u.password = hashPassword(u.password);
     }
   });
 
-  fs.writeFileSync(DB_PATH, JSON.stringify(seedDB, null, 2), 'utf8');
-  return seedDB;
+  const { db: migratedDb } = migrateDatabaseState(seedDB);
+  return migratedDb;
 }
 
 // Instantiate Database and load seed data
@@ -510,8 +511,19 @@ async function syncWithPostgres() {
     console.log('Synchronizing state with Cloud SQL PostgreSQL...');
     const result = await pgDb.select().from(appData).where(eq(appData.key, 'main_database_state'));
     if (result.length > 0) {
-      db = JSON.parse(result[0].value);
+      const { db: migratedDb, modified } = migrateDatabaseState(JSON.parse(result[0].value));
+      db = migratedDb;
       console.log('Successfully loaded persistent state from Cloud SQL PostgreSQL.');
+      if (modified) {
+        console.log('PostgreSQL database schema required structural upgrades. Persisting migrated schema back to PostgreSQL...');
+        await pgDb.insert(appData).values({
+          key: 'main_database_state',
+          value: JSON.stringify(db)
+        }).onConflictDoUpdate({
+          target: appData.key,
+          set: { value: JSON.stringify(db) }
+        });
+      }
     } else {
       console.log('No existing state found in PostgreSQL. Seeding Cloud SQL database with initial state...');
       await pgDb.insert(appData).values({
@@ -529,8 +541,7 @@ async function syncWithPostgres() {
 }
 
 function saveDB() {
-  fs.writeFileSync(DB_PATH, JSON.stringify(db, null, 2), 'utf8');
-  // Asynchronously save state to Cloud SQL PostgreSQL
+  // Asynchronously save state directly to Cloud SQL PostgreSQL (never writes local database.json)
   pgDb.insert(appData).values({
     key: 'main_database_state',
     value: JSON.stringify(db)
